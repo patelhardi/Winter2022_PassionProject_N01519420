@@ -1,0 +1,41 @@
+﻿@model Winter2022_PassionProject_N01519420.Models.ViewModels.UpdateActor
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div>
+    <a href="/Actor/ListAll">Back to Main Page</a>
+</div>
+
+<br/>
+
+<h2>Update Actor</h2>
+<form method="POST" action="/Actor/Update/@Model.SelectedActor.ActorID">
+    <div style="display:none;">
+        @* Pass through the actor ID *@
+        <input type="text" name="ActorID" value="@Model.SelectedActor.ActorID" />
+    </div>
+    <div>
+        <label>First Name:</label>
+        <input type="text" name="ActorFirstName" value="@Model.SelectedActor.ActorFirstName" />
+    </div>
+    <div>
+        <label>Last Name:</label>
+        <input type="text" name="ActorLastName" value="@Model.SelectedActor.ActorLastName" />
+    </div>
+    <div>
+        <input type="submit" value="Update Actor" />
+    </div>
+</form>
+
+<hr/>
+
+<div>
+    <label>List of Movies: </label>
+    <br />
+    @foreach (var movies in Model.MovieOptions)
+    {
+        <label>@movies.MovieName</label>@movies.ReleaseYear
+        <br />
+    }
+</div>

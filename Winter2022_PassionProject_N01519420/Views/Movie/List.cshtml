@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Winter2022_PassionProject_N01519420.Models.MovieDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Movies</h2>
+
+<hr />
+
+<div>
+    @foreach (var movie in Model)
+    {
+        <a href="/Movie/Details/@movie.MovieID">@movie.MovieName</a><br />
+        <div>Release Year: @movie.ReleaseYear</div>
+        <br />
+    }
+</div>
+
+<br />
+
+<div>
+    <form action="/Actor/New" method="GET">
+        <input type="submit" value="Add New Actor" />
+    </form>
+</div>
+
+<br />
+
+
+<div>
+    <form action="/Movie/New" method="GET">
+        <input type="submit" value="Add New Movie" />
+    </form>
+</div>

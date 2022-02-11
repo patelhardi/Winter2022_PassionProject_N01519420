@@ -1,0 +1,54 @@
+﻿@model Winter2022_PassionProject_N01519420.Models.ViewModels.DetailsMovie
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h3>Movie Name: @Model.SelectedMovie.MovieName</h3>
+<div>Release Year: @Model.SelectedMovie.ReleaseYear</div>
+
+<div>
+    <h3>List of Actors:</h3>
+    @foreach (var actor in Model.KeptActors)
+    {
+        <a href="/Actor/Details/@actor.ActorID">@actor.ActorFirstName @actor.ActorLastName</a>
+        <a href="/Movie/UnAssociate/@Model.SelectedMovie.MovieID?ActorID=@actor.ActorID" style="color:red;"> [ x ] </a>
+        <br />
+    }
+</div>
+
+<hr/>
+
+<div>
+    Add More Actors to the @Model.SelectedMovie.MovieName:
+    <form method="POST" action="/Movie/Associate/@Model.SelectedMovie.MovieID">
+        <select name="ActorID">
+            @foreach (var actor in Model.ActorsOptions)
+            {
+                <option value="@actor.ActorID">@actor.ActorFirstName @actor.ActorLastName</option>
+            }
+        </select>
+
+        <input type="submit" value="Associate Actor" />
+    </form>
+</div>
+
+<hr/>
+
+<div>
+    <form action="/Movie/Edit/@Model.SelectedMovie.MovieID" method="POST">
+        <input type="submit" value="Update">
+    </form>
+
+    <br/>
+
+    <form action="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+</div>
+
+<br/>
+
+<div>
+    <a href="/Movie/List">Go Back to Main Page</a>
+</div>

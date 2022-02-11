@@ -1,0 +1,33 @@
+﻿@model Winter2022_PassionProject_N01519420.Models.ViewModels.DetailsActor
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h3>List of Movies @Model.SelectedActor.ActorFirstName @Model.SelectedActor.ActorLastName</h3>
+    <hr/>
+    @foreach (var movie in Model.KeptMovies)
+    {
+        <label>@movie.MovieName</label> @movie.ReleaseYear
+        <br />
+    }
+</div>
+
+<hr/>
+
+<div>
+    <form action="/Actor/Edit/@Model.SelectedActor.ActorID" method="POST">
+        <input type="submit" value="Update">
+    </form>
+    <br/>
+    <form action="/Actor/DeleteConfirm/@Model.SelectedActor.ActorID" method="POST">
+        <input type="submit" value="Delete">
+    </form>
+</div>
+
+<br/>
+
+<div>
+    <a href="/Actor/ListAll">Back to Main Page</a>
+</div>

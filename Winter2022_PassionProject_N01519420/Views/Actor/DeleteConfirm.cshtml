@@ -1,0 +1,16 @@
+﻿@model Winter2022_PassionProject_N01519420.Models.ActorDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Do you want to Delete @Model.ActorFirstName @Model.ActorLastName?</h2>
+
+<a href="/Actor/ListAll">Back to Main Page</a>
+
+<br/>
+
+<div>
+    <form action="/Actor/Delete/@Model.ActorID" method="POST">
+        <input type="submit" value="Delete" />
+    </form>
+</div>
