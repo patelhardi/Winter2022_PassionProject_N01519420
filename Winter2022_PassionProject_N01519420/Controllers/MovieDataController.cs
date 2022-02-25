@@ -11,6 +11,8 @@ using System.Web.Http.Description;
 using Winter2022_PassionProject_N01519420.Models;
 using Winter2022_PassionProject_N01519420.Models.ViewModels;
 using System.Diagnostics;
+using System.Web;
+using System.IO;
 
 namespace Winter2022_PassionProject_N01519420.Controllers
 {
@@ -77,6 +79,8 @@ namespace Winter2022_PassionProject_N01519420.Controllers
             {
                 MovieID = Movie.MovieID,
                 MovieName = Movie.MovieName,
+                MovieHasPic = Movie.MovieHasPic,
+                PicExtension = Movie.PicExtension,
                 ReleaseYear = Movie.ReleaseYear
             };
             if (Movie == null)
@@ -137,6 +141,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         [ResponseType(typeof(void))]
         [HttpPost]
         [Route("api/MovieData/UpdateMovie/{id}")]
+        [Authorize]
         public IHttpActionResult UpdateMovie(int id, Movie movie)
         {
             if (!ModelState.IsValid)
@@ -150,7 +155,8 @@ namespace Winter2022_PassionProject_N01519420.Controllers
             }
            
             db.Entry(movie).State = EntityState.Modified;
-
+            db.Entry(movie).Property(m => m.MovieHasPic).IsModified = false;
+            db.Entry(movie).Property(m => m.PicExtension).IsModified = false;
             try
             {
                 db.SaveChanges();
@@ -171,6 +177,90 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         }
 
         /// <summary>
+        /// Receives movie picture data, uploads it to the webserver and updates the movie's HasPic option
+        /// </summary>
+        /// <param name="id">the movie id</param>
+        /// <returns>status code 200 if successful.</returns>
+        /// <example>
+        /// POST: api/movieData/UpdatemoviePic/3
+        /// HEADER: enctype=multipart/form-data
+        /// FORM-DATA: image
+        /// </example>
+        /// https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
+
+        [HttpPost]
+        public IHttpActionResult UploadMoviePic(int id)
+        {
+
+            bool haspic = false;
+            string picextension;
+            if (Request.Content.IsMimeMultipartContent())
+            {
+                Debug.WriteLine("Received multipart form data.");
+
+                int numfiles = HttpContext.Current.Request.Files.Count;
+                Debug.WriteLine("Files Received: " + numfiles);
+
+                //Check if a file is posted
+                if (numfiles == 1 && HttpContext.Current.Request.Files[0] != null)
+                {
+                    var moviePic = HttpContext.Current.Request.Files[0];
+                    //Check if the file is empty
+                    if (moviePic.ContentLength > 0)
+                    {
+                        //establish valid file types (can be changed to other file extensions if desired!)
+                        var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
+                        var extension = Path.GetExtension(moviePic.FileName).Substring(1);
+                        //Check the extension of the file
+                        if (valtypes.Contains(extension))
+                        {
+                            try
+                            {
+                                //file name is the id of the image
+                                string fn = id + "." + extension;
+
+                                //get a direct file path to ~/Content/movies/{id}.{extension}
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/Images/Movies/"), fn);
+
+                                //save the file
+                                moviePic.SaveAs(path);
+
+                                //if these are all successful then we can set these fields
+                                haspic = true;
+                                picextension = extension;
+
+                                //Update the movie haspic and picextension fields in the database
+                                Movie Selectedmovie = db.movies.Find(id);
+                                Selectedmovie.MovieHasPic = haspic;
+                                Selectedmovie.PicExtension = extension;
+                                db.Entry(Selectedmovie).State = EntityState.Modified;
+
+                                db.SaveChanges();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine("movie Image was not saved successfully.");
+                                Debug.WriteLine("Exception:" + ex);
+                                return BadRequest();
+                            }
+                        }
+                    }
+
+                }
+
+                return Ok();
+            }
+            else
+            {
+                //not multipart form data
+                return BadRequest();
+
+            }
+
+        }
+
+        /// <summary>
         /// add new movie information into database
         /// </summary>
         /// <param name="movie">movie entity</param>
@@ -178,6 +268,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         // POST: api/MovieData/AddMovie
         [ResponseType(typeof(Movie))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddMovie(Movie movie)
         {
             if (!ModelState.IsValid)
@@ -199,6 +290,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         // POST: api/MovieData/DeleteMovie/5
         [ResponseType(typeof(Movie))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult DeleteMovie(int id)
         {
             Movie movie = db.movies.Find(id);

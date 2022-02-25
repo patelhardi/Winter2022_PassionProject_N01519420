@@ -206,6 +206,14 @@
     <Compile Include="Migrations\202201202203517_create-manytomanyrelationship.Designer.cs">
       <DependentUpon>202201202203517_create-manytomanyrelationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202240307490_addtwocolumnintomovietable.cs" />
+    <Compile Include="Migrations\202202240307490_addtwocolumnintomovietable.Designer.cs">
+      <DependentUpon>202202240307490_addtwocolumnintomovietable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202250344063_addedtwocolumnintoactortable.cs" />
+    <Compile Include="Migrations\202202250344063_addedtwocolumnintoactortable.Designer.cs">
+      <DependentUpon>202202250344063_addedtwocolumnintoactortable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Actor.cs" />
@@ -224,6 +232,27 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Actors\13.jpg" />
+    <Content Include="Content\Images\Actors\14.jpg" />
+    <Content Include="Content\Images\Actors\15.jpg" />
+    <Content Include="Content\Images\Actors\16.jpg" />
+    <Content Include="Content\Images\Actors\17.jpg" />
+    <Content Include="Content\Images\Actors\18.jpg" />
+    <Content Include="Content\Images\Actors\19.jpg" />
+    <Content Include="Content\Images\Actors\1.jpg" />
+    <Content Include="Content\Images\Actors\10.jpg" />
+    <Content Include="Content\Images\Actors\11.jpg" />
+    <Content Include="Content\Images\Actors\12.jpg" />
+    <Content Include="Content\Images\Actors\2.jpg" />
+    <Content Include="Content\Images\Actors\3.jpg" />
+    <Content Include="Content\Images\Actors\4.jpg" />
+    <Content Include="Content\Images\Actors\5.jpg" />
+    <Content Include="Content\Images\Actors\6.jpg" />
+    <Content Include="Content\Images\Actors\7.jpg" />
+    <Content Include="Content\Images\Actors\8.jpg" />
+    <Content Include="Content\Images\Actors\9.jpg" />
+    <Content Include="Content\Images\Actors\default.jpg" />
+    <Content Include="Content\Images\Movies\default.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -319,6 +348,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201202203517_create-manytomanyrelationship.resx">
       <DependentUpon>202201202203517_create-manytomanyrelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202240307490_addtwocolumnintomovietable.resx">
+      <DependentUpon>202202240307490_addtwocolumnintomovietable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202250344063_addedtwocolumnintoactortable.resx">
+      <DependentUpon>202202250344063_addedtwocolumnintoactortable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

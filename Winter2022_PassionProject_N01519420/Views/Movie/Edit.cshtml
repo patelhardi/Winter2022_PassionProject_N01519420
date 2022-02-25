@@ -10,21 +10,26 @@
 <br/>
 
 <h2>Update Movie</h2>
-<form method="POST" action="/Movie/Update/@Model.SelectedMovie.MovieID">
+<form method="POST" action="/Movie/Update/@Model.SelectedMovie.MovieID" enctype = "multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div style="display:none;">
         @* Pass through the movie ID *@
-        <input type="text" name="MovieID" value="@Model.SelectedMovie.MovieID" />
+        <input type="text" name="MovieID" value="@Model.SelectedMovie.MovieID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
     </div>
     <div>
-        <label>Movie Name:</label>
-        <input type="text" name="MovieName" value="@Model.SelectedMovie.MovieName" />
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Movie Name:</label>
+        <input type="text" name="MovieName" value="@Model.SelectedMovie.MovieName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
     </div>
     <div>
-        <label>Release Year:</label>
-        <input type="number" name="ReleaseYear" value="@Model.SelectedMovie.ReleaseYear" />
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Release Year:</label>
+        <input type="number" name="ReleaseYear" value="@Model.SelectedMovie.ReleaseYear" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
     </div>
     <div>
-        <input type="submit" value="Update Movie" />
+        <input type="file" name="MoviePic" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
+    </div>
+    <br/>
+    <br/>
+    <div>
+        <input type="submit" value="Update Movie" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
     </div>
 </form>
 

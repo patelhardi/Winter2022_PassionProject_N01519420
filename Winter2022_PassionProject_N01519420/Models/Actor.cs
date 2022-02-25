@@ -15,6 +15,8 @@ namespace Winter2022_PassionProject_N01519420.Models
         public string ActorFirstName { get; set; }
 
         public string ActorLastName { get; set; }
+        public bool ActorHasPic { get; set; }
+        public string PicExtension { get; set; }
 
         //actor has many movies
         public ICollection<Movie> movies { get; set; }
@@ -26,5 +28,7 @@ namespace Winter2022_PassionProject_N01519420.Models
         public string ActorFirstName { get; set; }
 
         public string ActorLastName { get; set; }
+        public bool ActorHasPic { get; set; }
+        public string PicExtension { get; set; }
     }
 }

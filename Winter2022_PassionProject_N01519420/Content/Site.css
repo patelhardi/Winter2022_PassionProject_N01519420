@@ -1,12 +1,16 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

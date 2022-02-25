@@ -7,33 +7,44 @@
 
 <hr/>
 
-<div>
+<div style="border-radius: 5px; background-color: #f2f2f2; padding: 20px; height:1000px;">
     @foreach (var actor in Model)
     {
-        <a href="/Actor/Details/@actor.ActorID">@actor.ActorFirstName @actor.ActorLastName</a><br />
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <a style="font-size:large; color:red; text-decoration:none;" href="/Actor/Details/@actor.ActorID">@actor.ActorFirstName @actor.ActorLastName</a><br />
+        @if (actor.ActorHasPic)
+        {
+            <img style="display:block; width:150px; height:150px; border:2px solid black;" alt="@actor.ActorFirstName" src="/Content/Images/Actors/@actor.ActorID.@actor.PicExtension" />
+        }
+        else
+        {
+            <img style="display:block; width:150px; height:150px;" alt="@actor.ActorFirstName" src="~/Content/Images/Actors/default.jpg" />
+        }
+        <br/>
+    </div>
     }
 </div>
 
 <br/>
 
 <div>
-    <form action="/Actor/List" method="GET">
-        <input type="submit" value="Search Actor" />
+    <form action="/Actor/List" method="GET" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Search Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
     </form>
 </div>
 
 <br/>
 
 <div>
-    <form action="/Actor/New" method="GET">
-        <input type="submit" value="Add New Actor" />
+    <form action="/Actor/New" method="GET" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Add New Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </form>
 </div>
 
 <br/>
 
 <div>
-    <form action="/Movie/New" method="GET">
-        <input type="submit" value="Add New Movie" />
+    <form action="/Movie/New" method="GET" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Add New Movie" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
     </form>
 </div>

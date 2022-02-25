@@ -19,8 +19,42 @@ namespace Winter2022_PassionProject_N01519420.Controllers
 
         static MovieController()
         {
-            client = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                //cookies are manually set in RequestHeader
+                UseCookies = false
+            };
+
+            client = new HttpClient(handler);
             client.BaseAddress = new Uri("https://localhost:44313/api/");
+        }
+
+        /// <summary>
+        /// Grabs the authentication cookie sent to this controller.
+        /// For proper WebAPI authentication, you can send a post request with login credentials to the WebAPI and log the access token from the response. The controller already knows this token, so we're just passing it up the chain.
+        /// 
+        /// Here is a descriptive article which walks through the process of setting up authorization/authentication directly.
+        /// https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
+        /// </summary>
+        private void GetApplicationCookie()
+        {
+            string token = "";
+            //HTTP client is set up to be reused, otherwise it will exhaust server resources.
+            //This is a bit dangerous because a previously authenticated cookie could be cached for
+            //a follow-up request from someone else. Reset cookies in HTTP client before grabbing a new one.
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!User.Identity.IsAuthenticated) return;
+
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get(".AspNet.ApplicationCookie");
+            if (cookie != null) token = cookie.Value;
+
+            //collect token as it is submitted to the controller
+            //use it to pass along to the WebAPI.
+            Debug.WriteLine("Token Submitted is : " + token);
+            if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
+
+            return;
         }
 
         /// <summary>
@@ -126,6 +160,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// </summary>
         /// <returns>add movie page</returns>
         // GET: Movie/New
+        [Authorize]
         public ActionResult New()
         {
             return View();
@@ -139,8 +174,10 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// <returns>list of movies</returns>
         // POST: Movie/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Movie movie)
         {
+            GetApplicationCookie();//get token credentials
             //create new object using json
             //communicate with data controller class
             string url = "moviedata/addmovie";
@@ -165,6 +202,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// <param name="id">passing parameter movie id</param>
         /// <returns>edit page</returns>
         // GET: Movie/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             UpdateMovie viewModel = new UpdateMovie();
@@ -194,8 +232,10 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// <returns>update movie information into database</returns>
         // POST: Movie/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Movie movie)
+        [Authorize]
+        public ActionResult Update(int id, Movie movie, HttpPostedFileBase MoviePic)
         {
+            GetApplicationCookie();//get token credentials
             //create new object using json
             //communicate with data controller class
             string url = "moviedata/updatemovie/" + id;
@@ -204,7 +244,17 @@ namespace Winter2022_PassionProject_N01519420.Controllers
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && MoviePic != null)
+            {
+                url = "MovieData/UploadMoviePic/" + id;
+
+                MultipartFormDataContent requestcontent = new MultipartFormDataContent();
+                HttpContent imagecontent = new StreamContent(MoviePic.InputStream);
+                requestcontent.Add(imagecontent, "MoviePic", MoviePic.FileName);
+                response = client.PostAsync(url, requestcontent).Result;
+                return RedirectToAction("List");
+            }
+            else if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("List");
             }
@@ -220,6 +270,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// <param name="id">passing parameter movie id</param>
         /// <returns>delete page</returns>
         // GET: Movie/Delete/5
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             //communication with data controller class
@@ -237,8 +288,10 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// <returns>delete movie record from the database</returns>
         // POST: Movie/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id)
         {
+            GetApplicationCookie();//get token credentials
             //communicate with data controller class
             string url = "moviedata/deletemovie/" + id;
             HttpContent content = new StringContent("");

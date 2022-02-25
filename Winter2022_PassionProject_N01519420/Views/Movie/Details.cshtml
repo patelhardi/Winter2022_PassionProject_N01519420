@@ -8,6 +8,17 @@
 <div>Release Year: @Model.SelectedMovie.ReleaseYear</div>
 
 <div>
+    @{
+        string imageurl = "/Content/Images/Movies/default.jpg";
+        if (Model.SelectedMovie.MovieHasPic)
+        {
+            imageurl = "/Content/Images/Movies/" + Model.SelectedMovie.MovieID + "." + Model.SelectedMovie.PicExtension;
+        }
+    }
+    <div><img style="display:block; max-width:25%; height:25%;" alt="@Model.SelectedMovie.MovieName" src="@imageurl" /></div>
+</div>
+
+<div>
     <h3>List of Actors:</h3>
     @foreach (var actor in Model.KeptActors)
     {
@@ -21,29 +32,29 @@
 
 <div>
     Add More Actors to the @Model.SelectedMovie.MovieName:
-    <form method="POST" action="/Movie/Associate/@Model.SelectedMovie.MovieID">
-        <select name="ActorID">
+    <form method="POST" action="/Movie/Associate/@Model.SelectedMovie.MovieID" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <select name="ActorID" style="padding: 12px 12px 12px 0; display: inline-block;">
             @foreach (var actor in Model.ActorsOptions)
             {
                 <option value="@actor.ActorID">@actor.ActorFirstName @actor.ActorLastName</option>
             }
         </select>
 
-        <input type="submit" value="Associate Actor" />
+        <input type="submit" value="Associate Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
     </form>
 </div>
 
 <hr/>
 
 <div>
-    <form action="/Movie/Edit/@Model.SelectedMovie.MovieID" method="POST">
-        <input type="submit" value="Update">
+    <form action="/Movie/Edit/@Model.SelectedMovie.MovieID" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Update" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;">
     </form>
 
     <br/>
 
-    <form action="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID" method="POST">
-        <input type="submit" value="Delete">
+    <form action="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID" method="POST" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
+        <input type="submit" value="Delete" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;">
     </form>
 </div>
 

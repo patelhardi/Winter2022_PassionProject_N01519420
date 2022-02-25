@@ -11,6 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Winter2022_PassionProject_N01519420.Models;
 using System.Diagnostics;
+using System.Web;
+using System.IO;
 
 namespace Winter2022_PassionProject_N01519420.Controllers
 {
@@ -33,7 +35,9 @@ namespace Winter2022_PassionProject_N01519420.Controllers
             {
                 ActorID = a.ActorID,
                 ActorFirstName = a.ActorFirstName,
-                ActorLastName = a.ActorLastName
+                ActorLastName = a.ActorLastName,
+                ActorHasPic = a.ActorHasPic,
+                PicExtension = a.PicExtension
             }));
             return ActorDtos;
         }
@@ -124,7 +128,9 @@ namespace Winter2022_PassionProject_N01519420.Controllers
             {
                 ActorID = Actor.ActorID,
                 ActorFirstName = Actor.ActorFirstName,
-                ActorLastName = Actor.ActorLastName
+                ActorLastName = Actor.ActorLastName,
+                ActorHasPic = Actor.ActorHasPic,
+                PicExtension = Actor.PicExtension
             };
             if (Actor == null)
             {
@@ -143,6 +149,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         // POST: api/ActorData/UpdateActor/5
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult UpdateActor(int id, Actor actor)
         {
             if (!ModelState.IsValid)
@@ -156,6 +163,8 @@ namespace Winter2022_PassionProject_N01519420.Controllers
             }
 
             db.Entry(actor).State = EntityState.Modified;
+            db.Entry(actor).Property(a => a.ActorHasPic).IsModified = false;
+            db.Entry(actor).Property(a => a.PicExtension).IsModified = false;
 
             try
             {
@@ -176,6 +185,90 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         }
 
         /// <summary>
+        /// Receives actor picture data, uploads it to the webserver and updates the actor's HasPic option
+        /// </summary>
+        /// <param name="id">the actor id</param>
+        /// <returns>status code 200 if successful.</returns>
+        /// <example>
+        /// POST: api/actorData/UpdateactorPic/3
+        /// HEADER: enctype=multipart/form-data
+        /// FORM-DATA: image
+        /// </example>
+        /// https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
+
+        [HttpPost]
+        public IHttpActionResult UploadActorPic(int id)
+        {
+
+            bool haspic = false;
+            string picextension;
+            if (Request.Content.IsMimeMultipartContent())
+            {
+                Debug.WriteLine("Received multipart form data.");
+
+                int numfiles = HttpContext.Current.Request.Files.Count;
+                Debug.WriteLine("Files Received: " + numfiles);
+
+                //Check if a file is posted
+                if (numfiles == 1 && HttpContext.Current.Request.Files[0] != null)
+                {
+                    var actorPic = HttpContext.Current.Request.Files[0];
+                    //Check if the file is empty
+                    if (actorPic.ContentLength > 0)
+                    {
+                        //establish valid file types (can be changed to other file extensions if desired!)
+                        var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
+                        var extension = Path.GetExtension(actorPic.FileName).Substring(1);
+                        //Check the extension of the file
+                        if (valtypes.Contains(extension))
+                        {
+                            try
+                            {
+                                //file name is the id of the image
+                                string fn = id + "." + extension;
+
+                                //get a direct file path to ~/Content/actors/{id}.{extension}
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/Images/Actors/"), fn);
+
+                                //save the file
+                                actorPic.SaveAs(path);
+
+                                //if these are all successful then we can set these fields
+                                haspic = true;
+                                picextension = extension;
+
+                                //Update the actor haspic and picextension fields in the database
+                                Actor Selectedactor = db.actors.Find(id);
+                                Selectedactor.ActorHasPic = haspic;
+                                Selectedactor.PicExtension = extension;
+                                db.Entry(Selectedactor).State = EntityState.Modified;
+
+                                db.SaveChanges();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine("actor Image was not saved successfully.");
+                                Debug.WriteLine("Exception:" + ex);
+                                return BadRequest();
+                            }
+                        }
+                    }
+
+                }
+
+                return Ok();
+            }
+            else
+            {
+                //not multipart form data
+                return BadRequest();
+
+            }
+
+        }
+
+        /// <summary>
         /// Add new actor information
         /// </summary>
         /// <param name="actor">actor entity</param>
@@ -183,6 +276,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         // POST: api/ActorData/AddActor
         [ResponseType(typeof(Actor))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddActor(Actor actor)
         {
             if (!ModelState.IsValid)
@@ -204,6 +298,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         // POST: api/ActorData/DeleteActor/5
         [ResponseType(typeof(Actor))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult DeleteActor(int id)
         {
             Actor Actor = db.actors.Find(id);

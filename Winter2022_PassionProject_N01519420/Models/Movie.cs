@@ -15,6 +15,9 @@ namespace Winter2022_PassionProject_N01519420.Models
 
         public int ReleaseYear { get; set; }
 
+        public bool MovieHasPic { get; set; }
+        public string PicExtension { get; set; }
+
         //many actors in one movie
         public ICollection<Actor> actors { get; set; }
     }
@@ -25,5 +28,7 @@ namespace Winter2022_PassionProject_N01519420.Models
         public string MovieName { get; set; }
 
         public int ReleaseYear { get; set; }
+        public bool MovieHasPic { get; set; }
+        public string PicExtension { get; set; }
     }
 }
