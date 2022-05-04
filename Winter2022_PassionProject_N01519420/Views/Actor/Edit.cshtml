@@ -13,24 +13,28 @@
 <form method="POST" action="/Actor/Update/@Model.SelectedActor.ActorID" enctype="multipart/form-data" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div style="display:none;">
         @* Pass through the actor ID *@
-        <input type="text" name="ActorID" value="@Model.SelectedActor.ActorID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
+        <input type="text" name="ActorID" value="@Model.SelectedActor.ActorID" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">First Name:</label>
-        <input type="text" name="ActorFirstName" value="@Model.SelectedActor.ActorFirstName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
+        <input type="text" name="ActorFirstName" value="@Model.SelectedActor.ActorFirstName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Last Name:</label>
-        <input type="text" name="ActorLastName" value="@Model.SelectedActor.ActorLastName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
+        <input type="text" name="ActorLastName" value="@Model.SelectedActor.ActorLastName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
     </div>
     <div>
-        <input type="file" name="ActorPic" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Bio:</label>
+        <textarea name="Bio" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;">@Model.SelectedActor.Bio</textarea>
     </div>
-    <br/>
-    <br/>
+    <div>
+        <input type="file" name="ActorPic" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
+    </div>
+    <br />
+    <br />
 
     <div>
-        <input type="submit" value="Update Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
+        <input type="submit" value="Update Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </div>
 </form>
 

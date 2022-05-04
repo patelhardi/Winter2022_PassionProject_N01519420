@@ -7,27 +7,37 @@
 
 <hr/>
 
-<div style="border-radius: 5px; background-color: #f2f2f2; padding: 20px; height:1000px;">
+<div class="container-fluid" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     @foreach (var actor in Model)
     {
     <div class="col-lg-3 col-md-6 col-sm-12">
         <a style="font-size:large; color:red; text-decoration:none;" href="/Actor/Details/@actor.ActorID">@actor.ActorFirstName @actor.ActorLastName</a><br />
-        @if (actor.ActorHasPic)
-        {
-            <img style="display:block; width:150px; height:150px; border:2px solid black;" alt="@actor.ActorFirstName" src="/Content/Images/Actors/@actor.ActorID.@actor.PicExtension" />
+        @{
+            string pic = "/Content/Images/Actors/default.jpg";
+            string alt = "No Profile Picture Provided.";
+            if (actor.ActorHasPic)
+            {
+                pic = "/Content/Images/Actors/" + actor.ActorID + "." + actor.PicExtension;
+                alt = "picture of " + actor.ActorFirstName + " " + actor.ActorLastName;
+                <a data-lightbox="actor-@actor.ActorID" href="@pic" data-title="@alt">
+                    <img style="display:block; width:150px; height:150px; border:2px solid black;" src="@pic" alt="@alt" />
+                </a>
+            }
+            else
+            {
+                <a data-lightbox="actor-@actor.ActorID" href="@pic" data-title="@alt">
+                    <img style="display:block; width:150px; height:150px; border:2px solid black;" src="@pic" alt="@alt" />
+                </a>
+            }
         }
-        else
-        {
-            <img style="display:block; width:150px; height:150px;" alt="@actor.ActorFirstName" src="~/Content/Images/Actors/default.jpg" />
-        }
-        <br/>
+        <br />
     </div>
     }
 </div>
 
 <br/>
 
-<div>
+<div class="container-fluid">
     <form action="/Actor/List" method="GET" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
         <input type="submit" value="Search Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
     </form>
@@ -35,7 +45,7 @@
 
 <br/>
 
-<div>
+<div class="container-fluid">
     <form action="/Actor/New" method="GET" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
         <input type="submit" value="Add New Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </form>
@@ -43,7 +53,7 @@
 
 <br/>
 
-<div>
+<div class="container-fluid">
     <form action="/Movie/New" method="GET" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
         <input type="submit" value="Add New Movie" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
     </form>

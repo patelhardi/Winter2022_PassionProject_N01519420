@@ -14,6 +14,7 @@
         }
     }
     <div><img style="display:block; max-width:25%; height:25%;" alt="@Model.SelectedActor.ActorFirstName" src="@imageurl" /></div>
+    <div>Bio: @Html.Raw(Model.SelectedActor.Bio)</div>
     <hr />
     @foreach (var movie in Model.KeptMovies)
     {

@@ -36,6 +36,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
                 ActorID = a.ActorID,
                 ActorFirstName = a.ActorFirstName,
                 ActorLastName = a.ActorLastName,
+                Bio = a.Bio,
                 ActorHasPic = a.ActorHasPic,
                 PicExtension = a.PicExtension
             }));
@@ -70,7 +71,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
         /// </summary>
         /// <param name="id">passing parameter movie id</param>
         /// <returns>list of actors</returns>
-        // GET: api/MovieData/ListActorsForMovie/1
+        // GET: api/ActorData/ListActorsForMovie/1
         [HttpGet]
         [ResponseType(typeof(ActorDto))]
         public IHttpActionResult ListActorsForMovie(int id)
@@ -129,6 +130,7 @@ namespace Winter2022_PassionProject_N01519420.Controllers
                 ActorID = Actor.ActorID,
                 ActorFirstName = Actor.ActorFirstName,
                 ActorLastName = Actor.ActorLastName,
+                Bio = Actor.Bio,
                 ActorHasPic = Actor.ActorHasPic,
                 PicExtension = Actor.PicExtension
             };

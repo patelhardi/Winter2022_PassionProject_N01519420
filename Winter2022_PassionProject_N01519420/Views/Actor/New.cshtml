@@ -1,27 +1,33 @@
-﻿
+﻿@model Winter2022_PassionProject_N01519420.Models.ViewModels.UpdateActor
 @{
     ViewBag.Title = "New";
 }
 
 <h2>Add New Actor</h2>
 
-<br/>
+<br />
 
 <form method="POST" action="/Actor/Create" style="border-radius: 5px; background-color: #f2f2f2; padding: 20px;">
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">First Name:</label>
-        <input type="text" name="ActorFirstName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
+        <input type="text" name="ActorFirstName" data-val="true" data-val-required="Please Enter a First Name." style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        @Html.ValidationMessageFor(model => model.SelectedActor.ActorFirstName, "", new { @class = "text-danger", data_valmsg_for = "ActorFirstName" })
     </div>
     <div>
         <label style="padding: 12px 12px 12px 0; display: inline-block;">Last Name:</label>
-        <input type="text" name="ActorLastName" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"/>
+        <input type="text" name="ActorLastName" data-val="true" data-val-required="Please Enter a Last Name." style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;" />
+        @Html.ValidationMessageFor(model => model.SelectedActor.ActorLastName, "", new { @class = "text-danger", data_valmsg_for = "ActorLastName" })
     </div>
     <div>
-        <input type="submit" value="Add Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;"/>
+        <label style="padding: 12px 12px 12px 0; display: inline-block;">Bio:</label>
+        <textarea name="Bio" style="width: 90%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; resize: vertical;"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Add Actor" style="background-color: gray; color: white; padding: 12px 20px; border: none; border-radius: 4px;" />
     </div>
 </form>
 
-<br/>
+<br />
 
 <div>
     <a href="/Actor/ListAll">Back to Main Page</a>
