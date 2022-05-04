@@ -1,0 +1,795 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Winter2022_PassionProject_N01519420</name>
+    </assembly>
+    <members>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,Winter2022_PassionProject_N01519420.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,Winter2022_PassionProject_N01519420.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},Winter2022_PassionProject_N01519420.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.#ctor(Winter2022_PassionProject_N01519420.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,Winter2022_PassionProject_N01519420.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:Winter2022_PassionProject_N01519420.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Winter2022_PassionProject_N01519420.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.GetApplicationCookie">
+            <summary>
+            Grabs the authentication cookie sent to this controller.
+            For proper WebAPI authentication, you can send a post request with login credentials to the WebAPI and log the access token from the response. The controller already knows this token, so we're just passing it up the chain.
+            
+            Here is a descriptive article which walks through the process of setting up authorization/authentication directly.
+            https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.ListAll">
+            <summary>
+            Display list of all actors
+            Select * from actors
+            </summary>
+            <returns>list of all actors</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.List(System.String)">
+            <summary>
+            Display list of actors as per search box value
+            </summary>
+            <param name="SearchKey">search box value</param>
+            <returns>list of actors</returns>
+            <example>Actor/List/Tom => Tom Cruise
+                                       Tom Holland                           
+                                       Tom Felton
+            </example>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.Details(System.Int32)">
+            <summary>
+            Select * from actor where id = 5
+            </summary>
+            <param name="id">passing parameter actor id</param>
+            <returns>details of perticular actor</returns>
+            <example>Actor/Details/5 => Actor First Name: Millie
+                                        Actor Last Name: Bobby Brown</example>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.Error">
+            <summary>
+            Display Error Page
+            </summary>
+            <returns>Error Page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.New">
+            <summary>
+            Display Add New actor page
+            </summary>
+            <returns>New Actor Page</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Winter2022_PassionProject_N01519420.Controllers.ActorController.Create(Winter2022_PassionProject_N01519420.Models.Actor)" -->
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.Edit(System.Int32)">
+            <summary>
+            Display Update Page
+            </summary>
+            <param name="id">passing perticular Actor id </param>
+            <returns>Edit Actor page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.Update(System.Int32,Winter2022_PassionProject_N01519420.Models.Actor,System.Web.HttpPostedFileBase)">
+            <summary>
+            Upadte perticular actor
+            update actor(fname, lname) set(newFname, newLname) where id=2
+            </summary>
+            <param name="id">perticular actor id</param>
+            <param name="actor">Actor entity</param>
+            <returns>upadate actor information into database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.DeleteConfirm(System.Int32)">
+            <summary>
+            Display Delete page
+            </summary>
+            <param name="id">perticular actor id</param>
+            <returns>delete page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorController.Delete(System.Int32)">
+            <summary>
+            delete actor record for perticular actor
+            delete actor where actorid = 5
+            </summary>
+            <param name="id">passing perticular actor id</param>
+            <returns>delete record from database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.ListActors">
+            <summary>
+            Display list of all actors
+            </summary>
+            <returns>list of actors</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.ListActorsBySearchKey(System.String)">
+            <summary>
+            Display list of all actors as per search box value
+            </summary>
+            <param name="SearchKey">search box value</param>
+            <returns>list of actors</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.ListActorsForMovie(System.Int32)">
+            <summary>
+            display list of actors in perticular movie
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>list of actors</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.ListActorsNotInPerticularMovie(System.Int32)">
+            <summary>
+            display list of actors that are not in perticular movie
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>list of actors</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.FindActor(System.Int32)">
+            <summary>
+            Display details of perticular actor 
+            </summary>
+            <param name="id">passing parameter actor id</param>
+            <returns>details of perticular actor</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.UpdateActor(System.Int32,Winter2022_PassionProject_N01519420.Models.Actor)">
+            <summary>
+            Update perticular actor information
+            </summary>
+            <param name="id">passing parameter actor id</param>
+            <param name="actor">actor entity</param>
+            <returns>update actor information into database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.UploadActorPic(System.Int32)">
+            <summary>
+            Receives actor picture data, uploads it to the webserver and updates the actor's HasPic option
+            </summary>
+            <param name="id">the actor id</param>
+            <returns>status code 200 if successful.</returns>
+            <example>
+            POST: api/actorData/UpdateactorPic/3
+            HEADER: enctype=multipart/form-data
+            FORM-DATA: image
+            </example>
+            https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.AddActor(Winter2022_PassionProject_N01519420.Models.Actor)">
+            <summary>
+            Add new actor information
+            </summary>
+            <param name="actor">actor entity</param>
+            <returns>add actor information into database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.ActorDataController.DeleteActor(System.Int32)">
+            <summary>
+            Delete selected actor
+            </summary>
+            <param name="id">passing parameter actor id</param>
+            <returns>delete actor into database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.GetApplicationCookie">
+            <summary>
+            Grabs the authentication cookie sent to this controller.
+            For proper WebAPI authentication, you can send a post request with login credentials to the WebAPI and log the access token from the response. The controller already knows this token, so we're just passing it up the chain.
+            
+            Here is a descriptive article which walks through the process of setting up authorization/authentication directly.
+            https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
+            </summary>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.List">
+            <summary>
+            display list of all movies
+            select * from movie
+            </summary>
+            <returns>list of movies</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Details(System.Int32)">
+            <summary>
+            display detail of perticular movie
+            select * from movie where id = 5
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>details of perticular movie</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Associate(System.Int32,System.Int32)">
+            <summary>
+            add new actor in the perticular movie
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <param name="ActorID">passing parameter actor id</param>
+            <returns>add actor in the perticular movie</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.UnAssociate(System.Int32,System.Int32)">
+            <summary>
+            remove actor from the perticular movie
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <param name="ActorID">passing parameter actor id</param>
+            <returns>remove actor from perticular movie</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Error">
+            <summary>
+            display error page
+            </summary>
+            <returns>error page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.New">
+            <summary>
+            display add new movie page
+            </summary>
+            <returns>add movie page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Create(Winter2022_PassionProject_N01519420.Models.Movie)">
+            <summary>
+            add new movie into the database
+            insert into movie(name, releaseyear) values(mName, mReleaseYear)
+            </summary>
+            <param name="movie">movie entity</param>
+            <returns>list of movies</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Edit(System.Int32)">
+            <summary>
+            display edit page for perticular movie
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>edit page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Update(System.Int32,Winter2022_PassionProject_N01519420.Models.Movie,System.Web.HttpPostedFileBase)">
+            <summary>
+            update perticular movie details into the database
+            update movie set(name, release year) where id = 5
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <param name="movie">movie entity</param>
+            <returns>update movie information into database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.DeleteConfirm(System.Int32)">
+            <summary>
+            display delete page for perticular movie id
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>delete page</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieController.Delete(System.Int32)">
+            <summary>
+            delete perticular movie from the database
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>delete movie record from the database</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.ListMovies">
+            <summary>
+            Display List of all movies
+            </summary>
+            <returns>list of movies</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.ListMoviesForActor(System.Int32)">
+            <summary>
+            display list of movies for perticular actor
+            </summary>
+            <param name="id">passing parameter actor id</param>
+            <returns>list of movies for perticular actor</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.FindMovie(System.Int32)">
+            <summary>
+            display record for perticular movie
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>details of perticular movie</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.AssociateMovieWithActor(System.Int32,System.Int32)">
+            <summary>
+            add new actor in the perticular movie
+            </summary>
+            <param name="movieid">passing parameter movie id</param>
+            <param name="actorid">passing parameter actor id</param>
+            <returns>add new actor in the perticular movie</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.UnAssociateMovieWithActor(System.Int32,System.Int32)">
+            <summary>
+            remove actor from perticular movie
+            </summary>
+            <param name="movieid">passing parameter movie id</param>
+            <param name="actorid">passing parameter actor id</param>
+            <returns>remove actor from the perticular movie</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.UpdateMovie(System.Int32,Winter2022_PassionProject_N01519420.Models.Movie)">
+            <summary>
+            update perticular movie information
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <param name="movie">movie entity</param>
+            <returns>updated movie record</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.UploadMoviePic(System.Int32)">
+            <summary>
+            Receives movie picture data, uploads it to the webserver and updates the movie's HasPic option
+            </summary>
+            <param name="id">the movie id</param>
+            <returns>status code 200 if successful.</returns>
+            <example>
+            POST: api/movieData/UpdatemoviePic/3
+            HEADER: enctype=multipart/form-data
+            FORM-DATA: image
+            </example>
+            https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.AddMovie(Winter2022_PassionProject_N01519420.Models.Movie)">
+            <summary>
+            add new movie information into database
+            </summary>
+            <param name="movie">movie entity</param>
+            <returns>added new movie record</returns>
+        </member>
+        <member name="M:Winter2022_PassionProject_N01519420.Controllers.MovieDataController.DeleteMovie(System.Int32)">
+            <summary>
+            delete perticular movie from the database
+            </summary>
+            <param name="id">passing parameter movie id</param>
+            <returns>remove perticular movie record</returns>
+        </member>
+    </members>
+</doc>
