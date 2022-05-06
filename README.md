@@ -23,4 +23,4 @@ update-database
 
 ## 3. References
 1. https://www.tiny.cloud/
-2. 
+2. https://lokeshdhakar.com/projects/lightbox2/
