@@ -20,7 +20,7 @@
                 pic = "/Content/Images/Actors/" + actor.ActorID + "." + actor.PicExtension;
                 alt = "picture of " + actor.ActorFirstName + " " + actor.ActorLastName;
                 <a data-lightbox="actor-@actor.ActorID" href="@pic" data-title="@alt">
-                    <img style="display:block; width:150px; height:150px; border:2px solid black;" src="@pic" alt="@alt" />
+                    <img style="display: block; width: 180px; height: 180px; object-fit: cover; border:2px solid black;" src="@pic" alt="@alt" />
                 </a>
             }
             else
